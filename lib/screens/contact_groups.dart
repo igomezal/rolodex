@@ -1,6 +1,8 @@
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:rolodex/main.dart';
 
+import 'contacts.dart';
+
 import '../data/contact_group.dart';
 import '../data/contact.dart';
 import '../main.dart';
@@ -12,9 +14,12 @@ class ContactGroupsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return _ContactGroupsView(
       selectedListId: 0,
-      onListSelected: (list) {
-        debugPrint(list.toString());
-      },
+      onListSelected: (list) => Navigator.of(context).push(
+        CupertinoPageRoute<void>(
+          title: list.title,
+          builder: (context) => ContactListPage(listId: list.id),
+        ),
+      ),
     );
   }
 }
@@ -45,7 +50,7 @@ class _ContactGroupsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      backgroundColor: CupertinoColors.extraLightBackgroundGray,
+      // backgroundColor: CupertinoColors.extraLightBackgroundGray,
       child: CustomScrollView(
         slivers: [
           const CupertinoSliverNavigationBar(largeTitle: Text('Lists')),
@@ -82,6 +87,25 @@ class _ContactGroupsView extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ContactGroupSidebar extends StatelessWidget {
+  const ContactGroupSidebar({
+    super.key,
+    required this.selectedListId,
+    required this.onListSelected,
+  });
+
+  final int selectedListId;
+  final void Function(int) onListSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return _ContactGroupsView(
+      selectedListId: selectedListId,
+      onListSelected: (list) => onListSelected(list.id),
     );
   }
 }

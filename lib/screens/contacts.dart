@@ -110,3 +110,14 @@ class ContactListSection extends StatelessWidget {
     );
   }
 }
+
+class ContactListDetail extends StatelessWidget {
+  const ContactListDetail({super.key, required this.listId});
+
+  final int listId;
+
+  @override
+  Widget build(BuildContext context) {
+    return _ContactListView(listId: listId, automaticallyImplyLeading: false);
+  }
+}
