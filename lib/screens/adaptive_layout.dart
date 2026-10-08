@@ -1,6 +1,7 @@
 import 'package:cupertino_ui/cupertino_ui.dart';
 
 import 'contact_groups.dart';
+import 'contacts.dart';
 
 const largeScreenMinWidth = 600;
 
@@ -29,7 +30,7 @@ class _AdaptiveLayoutState extends State<AdaptiveLayout> {
         if (isLargeScreen) {
           return _buildLargeScreenLayout();
         } else {
-          return ContactGroupsPage();
+          return ContactListPage(listId: 0);
         }
       },
     );
